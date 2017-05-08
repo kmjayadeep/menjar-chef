@@ -10,15 +10,33 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.orders)
+    Button bOrders;
+
+    @BindView(R.id.edit)
+    Button bEdit;
+
+    @BindView(R.id.statistics)
+    Button bStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Menjar");
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
+        if (!Global.admin.isManager())
+            bStats.setVisibility(View.GONE);
     }
 
     @Override
@@ -38,4 +56,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @OnClick(R.id.orders)
+    public void order() {
+        startActivity(new Intent(this, OrdersActivity.class));
+    }
+
 }

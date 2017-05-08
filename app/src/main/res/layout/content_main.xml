@@ -13,4 +13,37 @@
     tools:context="com.juggleclouds.menjaradmin.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Orders"
+            android:textColor="#fff"
+            android:id="@+id/orders"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimaryDark"/>
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Edit Catalog"
+            android:textColor="#fff"
+            android:id="@+id/edit"
+            android:layout_margin="10dp"
+            android:background="@color/colorAccent"/>
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Statistics"
+            android:textColor="#fff"
+            android:id="@+id/statistics"
+            android:layout_margin="10dp"
+            android:background="@color/colorAccent"/>
+    </LinearLayout>
+
 </RelativeLayout>

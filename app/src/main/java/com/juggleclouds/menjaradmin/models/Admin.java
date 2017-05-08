@@ -7,4 +7,8 @@ package com.juggleclouds.menjaradmin.models;
 public class Admin {
     public int id;
     public String name, pin, adminType;
+
+    public boolean isManager(){
+        return adminType.equals("MANAGER");
+    }
 }

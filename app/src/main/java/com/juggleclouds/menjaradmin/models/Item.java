@@ -1,10 +1,12 @@
 package com.juggleclouds.menjaradmin.models;
 
+import java.io.Serializable;
+
 /**
  * Created by jayadeep on 5/9/17.
  */
 
-public class Item {
+public class Item implements Serializable{
 
     public int id;
     public String name;

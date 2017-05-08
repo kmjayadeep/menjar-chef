@@ -3,8 +3,6 @@ package com.juggleclouds.menjaradmin;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.widget.Toast;
 
 import com.juggleclouds.menjaradmin.models.Order;
@@ -28,7 +26,9 @@ public class OrdersActivity extends AppCompatActivity {
     }
 
     public void refreshOrders() {
-        if(Global.admin.isChef())
+        if (this.isDestroyed())
+            return;
+        if (Global.admin.isChef())
             Global.apiClient.getPlacedOrders().enqueue(orderCallback);
         else
             Global.apiClient.getReadyOrders().enqueue(orderCallback);

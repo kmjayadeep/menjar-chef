@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.juggleclouds.menjaradmin">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".Global"
@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OrdersActivity" />
+        <activity
+            android:name=".OrdersActivity"
+            android:label="Orders" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

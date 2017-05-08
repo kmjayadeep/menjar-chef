@@ -1,6 +1,9 @@
 package com.juggleclouds.menjaradmin.utils.network;
 
 import com.juggleclouds.menjaradmin.models.Admin;
+import com.juggleclouds.menjaradmin.models.Order;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,5 +18,8 @@ public interface RestApiInterface {
 
     @POST("/admin/login")
     Call<Admin> login(@Body Admin admin);
+
+    @GET("/order/placed")
+    Call<List<Order>> getPlacedOrders();
 
 }

@@ -1,10 +1,12 @@
 package com.juggleclouds.menjaradmin.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.juggleclouds.menjaradmin.R;
@@ -19,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by jayadeep on 5/9/17.
  */
 
-public class OrdersAdapter extends BaseAdapter {
+public class OrdersAdapter extends BaseExpandableListAdapter {
 
     List<Order> orderList;
     Context context;
@@ -35,37 +37,78 @@ public class OrdersAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getGroupCount() {
         return orderList.size();
     }
 
     @Override
-    public Order getItem(int i) {
+    public int getChildrenCount(int i) {
+        return orderList.get(i).orderItems.size();
+    }
+
+    @Override
+    public Order getGroup(int i) {
         return orderList.get(i);
     }
 
     @Override
-    public long getItemId(int i) {
+    public Order.OrderItem getChild(int i, int i1) {
+        return orderList.get(i).orderItems.get(i);
+    }
+
+    @Override
+    public long getGroupId(int i) {
         return i;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        Holder holder;
+    public long getChildId(int i, int i1) {
+        return i1;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
+    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+        GroupHolder holder;
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.item_order, viewGroup, false);
-            holder = new Holder(view);
+            holder = new GroupHolder(view);
             view.setTag(holder);
         } else
-            holder = (Holder) view.getTag();
-        Order order = getItem(i);
+            holder = (GroupHolder) view.getTag();
+        Order order = getGroup(i);
         holder.tvTable.setText(order.table);
         holder.tvAmount.setText("₹" + order.amount);
         holder.tvComments.setText(order.comments);
         return view;
     }
 
-    class Holder {
+    @Override
+    public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+        ChildHolder holder;
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.item_orderitem, viewGroup, false);
+            holder = new ChildHolder(view);
+            view.setTag(holder);
+        } else
+            holder = (ChildHolder) view.getTag();
+        Order.OrderItem item = getChild(i, i1);
+        holder.tvNo.setText(i1 + ".");
+        holder.tvItem.setText(item.item.name);
+        holder.tvQuantity.setText(item.quantity + "");
+        return view;
+    }
+
+    @Override
+    public boolean isChildSelectable(int i, int i1) {
+        return false;
+    }
+
+    class GroupHolder {
         @BindView(R.id.table)
         TextView tvTable;
         @BindView(R.id.amount)
@@ -73,8 +116,21 @@ public class OrdersAdapter extends BaseAdapter {
         @BindView(R.id.comments)
         TextView tvComments;
 
-        public Holder(View v) {
+        public GroupHolder(View v) {
             ButterKnife.bind(this, v);
+        }
+    }
+
+    class ChildHolder {
+        @BindView(R.id.no)
+        TextView tvNo;
+        @BindView(R.id.item)
+        TextView tvItem;
+        @BindView(R.id.quantity)
+        TextView tvQuantity;
+
+        public ChildHolder(View view) {
+            ButterKnife.bind(this, view);
         }
     }
 }

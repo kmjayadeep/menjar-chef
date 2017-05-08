@@ -3,6 +3,8 @@ package com.juggleclouds.menjaradmin;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ExpandedMenuView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,7 +25,7 @@ public class OrdersActivity extends AppCompatActivity {
     List<Order> orders = new ArrayList<>();
 
     @BindView(R.id.orders)
-    ListView lvOrders;
+    ExpandableListView lvOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class OrdersActivity extends AppCompatActivity {
     };
 
     private void refreshLists() {
-        OrdersAdapter adapter = (OrdersAdapter) lvOrders.getAdapter();
+        OrdersAdapter adapter = (OrdersAdapter) lvOrders.getExpandableListAdapter();
         adapter.refresh(orders);
     }
 

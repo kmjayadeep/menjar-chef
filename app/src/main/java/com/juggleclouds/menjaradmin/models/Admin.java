@@ -11,4 +11,12 @@ public class Admin {
     public boolean isManager(){
         return adminType.equals("MANAGER");
     }
+
+    public boolean isChef(){
+        return adminType.equals("CHEF");
+    }
+
+    public boolean isWaiter(){
+        return adminType.equals("WAITER");
+    }
 }

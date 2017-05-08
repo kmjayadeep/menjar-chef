@@ -22,4 +22,7 @@ public interface RestApiInterface {
     @GET("/order/placed")
     Call<List<Order>> getPlacedOrders();
 
+    @GET("/order/ready")
+    Call<List<Order>> getReadyOrders();
+
 }

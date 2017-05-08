@@ -18,17 +18,21 @@ import retrofit2.Response;
 
 public class OrdersActivity extends AppCompatActivity {
 
-    List<Order> placedOrders = new ArrayList<>();
+    List<Order> orders = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
-        refreshPlacedOrders();
+        refreshOrders();
     }
 
-    public void refreshPlacedOrders() {
-        Global.apiClient.getPlacedOrders().enqueue(orderCallback);
+    public void refreshOrders() {
+        if(Global.admin.isChef())
+            Global.apiClient.getPlacedOrders().enqueue(orderCallback);
+        else
+            Global.apiClient.getReadyOrders().enqueue(orderCallback);
+
     }
 
     Callback<List<Order>> orderCallback = new Callback<List<Order>>() {
@@ -36,15 +40,15 @@ public class OrdersActivity extends AppCompatActivity {
         public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
             if (response.isSuccessful()) {
 //                Log.i("orders plced", response.body().toString());
-                placedOrders = response.body();
+                orders = response.body();
             } else {
                 Toast.makeText(OrdersActivity.this, "Unable to fetch orders", Toast.LENGTH_SHORT).show();
-                Log.e("err", response.errorBody().toString());
+//                Log.e("err", response.errorBody().toString());
             }
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    refreshPlacedOrders();
+                    refreshOrders();
                 }
             }, 4000);
         }
@@ -55,7 +59,7 @@ public class OrdersActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    refreshPlacedOrders();
+                    refreshOrders();
                 }
             }, 4000);
         }

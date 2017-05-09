@@ -97,8 +97,7 @@ public class OrdersActivity extends AppCompatActivity {
                     item.quantity = orderItem.quantity;
                     item.itemId = orderItem.itemId;
                     summary.put(orderItem.itemId, item);
-                }
-                else {
+                } else {
                     summary.get(orderItem.itemId).quantity += orderItem.quantity;
                 }
             }

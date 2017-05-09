@@ -44,6 +44,8 @@
         android:layout_marginTop="5dp"
         android:background="@color/colorPrimary"
         android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:text="Ready"
         android:textColor="#fff"
         android:textSize="10sp" />

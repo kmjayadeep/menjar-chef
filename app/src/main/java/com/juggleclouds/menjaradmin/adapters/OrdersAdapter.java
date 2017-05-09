@@ -96,7 +96,7 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
             if (Global.admin.isChef())
                 holder.bReady.setText("Ready");
             else
-                holder.bReady.setText("Delivered");
+                holder.bReady.setText("Deliver");
             holder.bReady.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -116,6 +116,10 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if (response.isSuccessful()) {
                     orderList.remove(order);
+                    notifyDataSetChanged();
+                    if (context instanceof OrderChangeListener) {
+                        ((OrderChangeListener) context).onOrderChanged();
+                    }
                 } else {
                     Toast.makeText(context, "unable to update", Toast.LENGTH_SHORT).show();
                 }
@@ -175,5 +179,9 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
         public ChildHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+
+    public interface OrderChangeListener {
+        void onOrderChanged();
     }
 }

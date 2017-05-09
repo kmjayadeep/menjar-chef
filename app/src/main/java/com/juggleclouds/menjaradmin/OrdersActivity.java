@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.ExpandedMenuView;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrdersActivity extends AppCompatActivity {
+public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.OrderChangeListener {
 
     List<Order> orders = new ArrayList<>();
 
@@ -38,7 +39,10 @@ public class OrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_orders);
         ButterKnife.bind(this);
         lvOrders.setAdapter(new OrdersAdapter(this, orders));
-        lvSummary.setAdapter(new SummaryAdapter(this, new ArrayList<Order.OrderItem>()));
+        if (!Global.admin.isChef())
+            findViewById(R.id.summary_layout).setVisibility(View.GONE);
+        else
+            lvSummary.setAdapter(new SummaryAdapter(this, new ArrayList<Order.OrderItem>()));
         refreshOrders();
     }
 
@@ -106,4 +110,8 @@ public class OrdersActivity extends AppCompatActivity {
         summaryAdapter.refresh(summary.values());
     }
 
+    @Override
+    public void onOrderChanged() {
+        refreshLists();
+    }
 }

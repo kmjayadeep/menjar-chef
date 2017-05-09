@@ -53,7 +53,7 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Order.OrderItem getChild(int i, int i1) {
-        return orderList.get(i).orderItems.get(i);
+        return orderList.get(i).orderItems.get(i1);
     }
 
     @Override
@@ -96,6 +96,7 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
             view.setTag(holder);
         } else
             holder = (ChildHolder) view.getTag();
+        Log.i("child", i + " " + i1);
         Order.OrderItem item = getChild(i, i1);
         holder.tvNo.setText(i1 + ".");
         holder.tvItem.setText(item.item.name);

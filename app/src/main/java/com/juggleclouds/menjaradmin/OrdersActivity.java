@@ -9,9 +9,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.juggleclouds.menjaradmin.adapters.OrdersAdapter;
+import com.juggleclouds.menjaradmin.adapters.SummaryAdapter;
 import com.juggleclouds.menjaradmin.models.Order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,12 +29,16 @@ public class OrdersActivity extends AppCompatActivity {
     @BindView(R.id.orders)
     ExpandableListView lvOrders;
 
+    @BindView(R.id.summary)
+    ListView lvSummary;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
         ButterKnife.bind(this);
         lvOrders.setAdapter(new OrdersAdapter(this, orders));
+        lvSummary.setAdapter(new SummaryAdapter(this, new ArrayList<Order.OrderItem>()));
         refreshOrders();
     }
 
@@ -80,6 +86,25 @@ public class OrdersActivity extends AppCompatActivity {
     private void refreshLists() {
         OrdersAdapter adapter = (OrdersAdapter) lvOrders.getExpandableListAdapter();
         adapter.refresh(orders);
+        if (!Global.admin.isChef())
+            return;
+        HashMap<Integer, Order.OrderItem> summary = new HashMap<>();
+        for (Order order : orders) {
+            for (Order.OrderItem orderItem : order.orderItems) {
+                if (!summary.containsKey(orderItem.itemId)) {
+                    Order.OrderItem item = new Order().new OrderItem();
+                    item.item = orderItem.item;
+                    item.quantity = orderItem.quantity;
+                    item.itemId = orderItem.itemId;
+                    summary.put(orderItem.itemId, item);
+                }
+                else {
+                    summary.get(orderItem.itemId).quantity += orderItem.quantity;
+                }
+            }
+        }
+        SummaryAdapter summaryAdapter = (SummaryAdapter) lvSummary.getAdapter();
+        summaryAdapter.refresh(summary.values());
     }
 
 }

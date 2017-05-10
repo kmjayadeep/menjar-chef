@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:srcCompat="@drawable/sample"
+                android:paddingBottom="10dp"
                 android:id="@+id/upimage" />
 
             <android.support.design.widget.TextInputLayout

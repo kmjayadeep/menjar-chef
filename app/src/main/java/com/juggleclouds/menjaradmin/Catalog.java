@@ -2,6 +2,7 @@ package com.juggleclouds.menjaradmin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,6 +63,7 @@ public class Catalog extends AppCompatActivity implements CatalogAdapter.ItemCli
                 rvItems.setAdapter(catalogAdapter);
                 GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
                 rvItems.setLayoutManager(layoutManager);
+                catalogAdapter.setClickListener(Catalog.this);
                 catalogAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
@@ -78,6 +81,12 @@ public class Catalog extends AppCompatActivity implements CatalogAdapter.ItemCli
         Item item=items.get(position);
         Intent intent=new Intent(Catalog.this,EditCatalog.class);
         intent.putExtra("Item",item);
+        startActivity(intent);
+    }
+    @OnClick(R.id.addItem)
+    public void addItem()
+    {
+        Intent intent=new Intent(Catalog.this,AddItem.class);
         startActivity(intent);
     }
 }

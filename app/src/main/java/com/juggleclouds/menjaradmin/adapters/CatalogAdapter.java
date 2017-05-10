@@ -16,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.juggleclouds.menjaradmin.Global;
 import com.juggleclouds.menjaradmin.R;
 import com.juggleclouds.menjaradmin.models.Item;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,6 +55,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ItemView
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         Item item=itemList.get(position);
+        //Uri uri = Uri.fromFile(new File(images.get(position).getDataPath()));
+        String url=Global.BASE_URL;
+        Picasso.with(context).load(url.substring(0,url.length()-1)+item.image).fit().error(R.drawable.sample).into(holder.ivItem);
         holder.tvItem.setText(item.name);
         String price= "₹"+String.valueOf(item.price);
         holder.tvPrice.setText(price);

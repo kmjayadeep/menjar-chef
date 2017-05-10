@@ -14,7 +14,7 @@ public class Item implements Serializable{
     public String category;
     public String subCategory;
     public String description;
-    public int availability;
+    public boolean availability;
     public String image;
 
     @Override

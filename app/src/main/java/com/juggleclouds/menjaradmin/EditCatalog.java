@@ -35,9 +35,11 @@ public class EditCatalog extends AppCompatActivity {
         itemName.setText(item.name);
         itemPrice.setText(String.valueOf(item.price));
         if(item.description!=null)
+        {
             itemDesc.setText(item.description);
+        }
         String url=Global.BASE_URL;
-        Picasso.with(getApplicationContext()).load(url.substring(0,url.length()-1)+item.image).fit().error(R.drawable.sample).into(ivItem);
+        Picasso.with(getApplicationContext()).load(url.substring(0,url.length()-1)+item.image).resize(200,200).centerCrop().error(R.drawable.sample).into(ivItem);
         if(item.availability)
         {
             itemAvail.setText("Yes");

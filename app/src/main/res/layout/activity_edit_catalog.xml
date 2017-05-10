@@ -12,8 +12,8 @@
     tools:context="com.juggleclouds.menjaradmin.EditCatalog">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         app:srcCompat="@drawable/sample"
         android:id="@+id/iv_item" />
 
@@ -33,25 +33,41 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_desc"
         android:layout_below="@id/tv_name"
-        android:text="Tasty Food" />
+        android:text="Tasty Food"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:text="Price"
+        android:layout_below="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cost" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_name"
+        android:layout_below="@+id/cost"
         android:id="@+id/tv_cost">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_cost" />
+
     </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:text="Availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/avail"
+        android:layout_below="@+id/tv_cost"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_avail"
-        android:layout_below="@+id/tv_cost">
+        android:layout_below="@+id/avail">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -16,6 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.R.attr.onClick;
+
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.orders)
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @OnClick(R.id.edit)
+    public void editCatalog(){startActivity(new Intent(this, Catalog.class));}
 
     @OnClick(R.id.orders)
     public void order() {

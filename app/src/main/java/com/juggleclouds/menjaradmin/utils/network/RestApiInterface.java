@@ -1,6 +1,7 @@
 package com.juggleclouds.menjaradmin.utils.network;
 
 import com.juggleclouds.menjaradmin.models.Admin;
+import com.juggleclouds.menjaradmin.models.Item;
 import com.juggleclouds.menjaradmin.models.Order;
 
 import java.util.List;
@@ -31,5 +32,8 @@ public interface RestApiInterface {
     @FormUrlEncoded
     @POST("/order/status/{id}")
     Call<Order> changeStatus(@Path("id") int id, @Field("status") String status);
+
+    @GET("/item")
+    Call<List<Item>> getCatalogItems();
 
 }

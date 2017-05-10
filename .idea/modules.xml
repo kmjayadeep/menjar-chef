@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MenjarAdmin.iml" filepath="$PROJECT_DIR$/MenjarAdmin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/menjar-chef.iml" filepath="$PROJECT_DIR$/menjar-chef.iml" />
     </modules>
   </component>
 </project>

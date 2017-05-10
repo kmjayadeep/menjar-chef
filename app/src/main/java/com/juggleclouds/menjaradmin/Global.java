@@ -11,7 +11,7 @@ import com.juggleclouds.menjaradmin.utils.network.RestApiInterface;
  */
 
 public class Global extends Application {
-    public static final String BASE_URL = "http://192.168.43.116:3000/";
+    public static final String BASE_URL = "http://192.168.43.155:3000/";
     public static Admin admin;
     public static RestApiInterface apiClient = ApiClient.getClient();
 }

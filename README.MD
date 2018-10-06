@@ -24,6 +24,6 @@
 
 <h3>License</h3>
 
-<ul><li>MIT Licence</li></ul>
+<ul><li>MIT License</li></ul>
 
 

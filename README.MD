@@ -24,6 +24,6 @@
 
 <h3>License</h3>
 
-<ul><li>MIT License</li></ul>
+<ul><li>GPL V3 License</li></ul>
 
 
